@@ -10,16 +10,21 @@ A modern sports community platform built with React and Supabase, enabling sport
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
 - [Environment Variables](#environment-variables)
+- [Available Scripts](#available-scripts)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
 
 ## 🎯 Overview
 
-Sports Tribe is a comprehensive sports community platform that allows users to create profiles, share posts, interact with content, and connect with fellow sports enthusiasts. The platform provides a seamless experience for discovering sports content and building a community around shared interests.
+Sports Buddy is a comprehensive sports community platform that allows users to create profiles, share posts, interact with content, and connect with fellow sports enthusiasts. The platform provides a seamless experience for discovering sports content and building a community around shared interests.
 
 ## ✨ Features
 
 - **User Authentication**: Secure sign-up/login system with Supabase Auth
 - **User Profiles**: Customizable profiles with bio, avatar, and social links
 - **Post Creation**: Share thoughts, images, and updates with the community
+- **Social Interactions**: Like, comment, and engage with posts
+- **Real-time Updates**: Live feed of community activities
 - **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - **Dark Mode Support**: Built with Tailwind CSS for modern UI/UX
 
@@ -48,7 +53,7 @@ Sports Tribe is a comprehensive sports community platform that allows users to c
 ## 📁 Project Structure
 
 ```
-SPORTS BUDDY/
+SPORTS-TRIBE-MAIN/
 ├── dist/                      # Production build output
 ├── node_modules/              # Dependencies
 ├── public/                    # Static assets
@@ -57,11 +62,8 @@ SPORTS BUDDY/
 │   └── robots.txt           # SEO crawler instructions
 ├── src/                      # Source code
 │   ├── components/          # React components
-│   ├── contexts/
-│   ├── hooks/
-│   ├── pages/
+│   ├── supabase/           # Supabase configuration & queries
 │   └── [other source files]
-├── supabase/           # Supabase configuration & queries
 ├── .env                     # Environment variables (not in git)
 ├── .gitignore              # Git ignore rules
 ├── bun.lockb               # Bun lockfile
@@ -91,13 +93,17 @@ SPORTS BUDDY/
 
 1. **Clone the repository**
    ```bash
-   git clone : 
+   git clone https://github.com/yourusername/sports-tribe.git
    cd sports-tribe
    ```
 
 2. **Install dependencies**
    ```bash
-   npm install 
+   npm install
+   # or
+   yarn install
+   # or
+   bun install
    ```
 
 3. **Set up environment variables**
@@ -111,11 +117,15 @@ SPORTS BUDDY/
 4. **Start the development server**
    ```bash
    npm run dev
-   
+   # or
+   yarn dev
+   # or
+   bun dev
+   ```
 
 5. **Open your browser**
    
-   Navigate to 
+   Navigate to `http://localhost:5173`
 
 ## 🔐 Environment Variables
 
@@ -150,5 +160,12 @@ npm run deploy
 
 ### Live Demo
 
-Visit the live application: `https://YOUR_USERNAME.github.io/sports-tribe/`
+Visit the live application: `https://anchal-prasad.github.io/SportsBuddy/`
+
+
+
+
+## 👥 Authors
+
+Your Name - Anchal 
 
