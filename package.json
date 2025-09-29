@@ -1,12 +1,12 @@
 {
-  "name": "Sports Buddy",
+  "name": "sports-buddy",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "description": "A modern sports community platform built with React and Supabase",
   "author": "Anchal Prasad",
   "license": "MIT",
-  "homepage": "https://github.com/Anchal-Prasad/SportsBuddy",
+  "homepage": "https://anchal-prasad.github.io/SportsBuddy/",
   "repository": {
     "type": "git",
     "url": "https://github.com/Anchal-Prasad/SportsBuddy.git"
