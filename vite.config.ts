@@ -11,7 +11,7 @@ const minimalTagger = () => ({
 
 export default defineConfig(({ mode }) => ({
   
-  base: mode === 'production' ? '/Sports Buddy/' : '/',
+  base: mode === 'production' ? '/SportsBuddy/' : '/',
   
   server: {
     host: "::",
