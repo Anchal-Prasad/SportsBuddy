@@ -1,4 +1,14 @@
 # Sports Buddy 🏆
+<img width="1352" height="604" alt="1" src="https://github.com/user-attachments/assets/4d098293-5b38-4e57-a054-beeb050e3d6d" />
+<img width="1363" height="608" alt="2" src="https://github.com/user-attachments/assets/6579620d-4a15-4d82-bf8d-d4755b8457fa" />
+<img width="1349" height="610" alt="4" src="https://github.com/user-attachments/assets/ef1b778c-f546-497f-a542-16e048bed0b7" />
+<img width="987" height="289" alt="5" src="https://github.com/user-attachments/assets/005ab06b-0725-4423-a943-ed24af50dc5c" />
+<img width="448" height="495" alt="6" src="https://github.com/user-attachments/assets/cd3cef6a-684a-4681-a466-04c8d270193c" />
+
+
+
+
+
 
 A modern sports community platform built with React and Supabase, enabling sports enthusiasts to connect, share experiences, and engage with their favorite sports content.
 
