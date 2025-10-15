@@ -7,8 +7,8 @@ const minimalTagger = () => ({
 });
 
 export default defineConfig(({ mode }) => ({
-  // Conditional base for dev and production
-  base: mode === 'production' ? '/SportsBuddy/' : '/',
+  // Use root base for both dev and production
+  base: '/',
   
   server: {
     host: "::",

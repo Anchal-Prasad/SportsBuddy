@@ -18,8 +18,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      {/* Use conditional basename for dev and production */}
-      <BrowserRouter basename={import.meta.env.MODE === "production" ? "/SportsBuddy" : "/"}>
+      {/* Use root basename for both dev and production */}
+      <BrowserRouter basename="/">
         <AuthProvider>
           <Header />
           <Routes>
