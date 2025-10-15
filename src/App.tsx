@@ -18,7 +18,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/SportsBuddy">
+      {/* Use conditional basename for dev and production */}
+      <BrowserRouter basename={import.meta.env.MODE === "production" ? "/SportsBuddy" : "/"}>
         <AuthProvider>
           <Header />
           <Routes>
@@ -26,7 +27,6 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/events" element={<Events />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>

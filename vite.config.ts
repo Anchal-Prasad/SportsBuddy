@@ -2,15 +2,12 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
-
 const minimalTagger = () => ({
   name: 'minimal-component-tagger',
-  
 });
 
-
 export default defineConfig(({ mode }) => ({
-  
+  // Conditional base for dev and production
   base: mode === 'production' ? '/SportsBuddy/' : '/',
   
   server: {
@@ -19,7 +16,7 @@ export default defineConfig(({ mode }) => ({
   },
   
   plugins: [
-    react(), 
+    react(),
     mode === "development" && minimalTagger()
   ].filter(Boolean),
   
