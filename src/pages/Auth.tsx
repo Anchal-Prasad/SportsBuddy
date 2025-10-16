@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -22,14 +22,17 @@ const signInSchema = z.object({
 
 const Auth = () => {
   const { user, signUp, signIn, loading } = useAuth();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [activeTab, setActiveTab] = useState('signin');
-  
-  // Redirect if already authenticated
-  if (user && !loading) {
-    return <Navigate to="/" replace />;
-  }
+
+  // Redirect if user is logged in after session check
+  useEffect(() => {
+    if (!loading && user) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [user, loading, navigate]);
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,22 +49,16 @@ const Auth = () => {
     try {
       const validation = signUpSchema.parse(data);
       const { error } = await signUp(validation.email, validation.password, validation.fullName);
-      
+
       if (!error) {
-        // Clear the form
         e.currentTarget.reset();
-        // Switch to sign-in tab after 1 second
-        setTimeout(() => {
-          setActiveTab('signin');
-        }, 1500);
+        setTimeout(() => setActiveTab('signin'), 1500);
       }
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors: Record<string, string> = {};
         error.errors.forEach((err) => {
-          if (err.path[0]) {
-            fieldErrors[err.path[0] as string] = err.message;
-          }
+          if (err.path[0]) fieldErrors[err.path[0] as string] = err.message;
         });
         setErrors(fieldErrors);
       }
@@ -88,9 +85,7 @@ const Auth = () => {
       if (error instanceof z.ZodError) {
         const fieldErrors: Record<string, string> = {};
         error.errors.forEach((err) => {
-          if (err.path[0]) {
-            fieldErrors[err.path[0] as string] = err.message;
-          }
+          if (err.path[0]) fieldErrors[err.path[0] as string] = err.message;
         });
         setErrors(fieldErrors);
       }
@@ -122,9 +117,7 @@ const Auth = () => {
         <Card className="shadow-elegant border-border/50">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold">Welcome</CardTitle>
-            <CardDescription>
-              Join the world's largest sports matching community
-            </CardDescription>
+            <CardDescription>Join the world's largest sports matching community</CardDescription>
           </CardHeader>
           <CardContent>
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
@@ -139,44 +132,21 @@ const Auth = () => {
                     <Label htmlFor="signin-email">Email</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="signin-email"
-                        name="email"
-                        type="email"
-                        placeholder="Enter your email"
-                        className="pl-10"
-                        required
-                      />
+                      <Input id="signin-email" name="email" type="email" placeholder="Enter your email" className="pl-10" required />
                     </div>
-                    {errors.email && (
-                      <p className="text-sm text-destructive">{errors.email}</p>
-                    )}
+                    {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="signin-password">Password</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="signin-password"
-                        name="password"
-                        type="password"
-                        placeholder="Enter your password"
-                        className="pl-10"
-                        required
-                      />
+                      <Input id="signin-password" name="password" type="password" placeholder="Enter your password" className="pl-10" required />
                     </div>
-                    {errors.password && (
-                      <p className="text-sm text-destructive">{errors.password}</p>
-                    )}
+                    {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
                   </div>
 
-                  <Button
-                    type="submit"
-                    className="w-full"
-                    variant="hero"
-                    disabled={isLoading}
-                  >
+                  <Button type="submit" className="w-full" variant="hero" disabled={isLoading}>
                     {isLoading ? 'Signing In...' : 'Sign In'}
                   </Button>
                 </form>
@@ -188,62 +158,30 @@ const Auth = () => {
                     <Label htmlFor="signup-name">Full Name</Label>
                     <div className="relative">
                       <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="signup-name"
-                        name="fullName"
-                        type="text"
-                        placeholder="Enter your full name"
-                        className="pl-10"
-                        required
-                      />
+                      <Input id="signup-name" name="fullName" type="text" placeholder="Enter your full name" className="pl-10" required />
                     </div>
-                    {errors.fullName && (
-                      <p className="text-sm text-destructive">{errors.fullName}</p>
-                    )}
+                    {errors.fullName && <p className="text-sm text-destructive">{errors.fullName}</p>}
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="signup-email">Email</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="signup-email"
-                        name="email"
-                        type="email"
-                        placeholder="Enter your email"
-                        className="pl-10"
-                        required
-                      />
+                      <Input id="signup-email" name="email" type="email" placeholder="Enter your email" className="pl-10" required />
                     </div>
-                    {errors.email && (
-                      <p className="text-sm text-destructive">{errors.email}</p>
-                    )}
+                    {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="signup-password">Password</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="signup-password"
-                        name="password"
-                        type="password"
-                        placeholder="Create a password (min 6 characters)"
-                        className="pl-10"
-                        required
-                      />
+                      <Input id="signup-password" name="password" type="password" placeholder="Create a password (min 6 characters)" className="pl-10" required />
                     </div>
-                    {errors.password && (
-                      <p className="text-sm text-destructive">{errors.password}</p>
-                    )}
+                    {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
                   </div>
 
-                  <Button
-                    type="submit"
-                    className="w-full"
-                    variant="hero"
-                    disabled={isLoading}
-                  >
+                  <Button type="submit" className="w-full" variant="hero" disabled={isLoading}>
                     {isLoading ? 'Creating Account...' : 'Create Account'}
                   </Button>
                 </form>
