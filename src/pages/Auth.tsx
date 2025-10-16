@@ -24,6 +24,7 @@ const Auth = () => {
   const { user, signUp, signIn, loading } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [activeTab, setActiveTab] = useState('signin');
   
   // Redirect if already authenticated
   if (user && !loading) {
@@ -47,7 +48,12 @@ const Auth = () => {
       const { error } = await signUp(validation.email, validation.password, validation.fullName);
       
       if (!error) {
-        // Form will be cleared by the success state
+        // Clear the form
+        e.currentTarget.reset();
+        // Switch to sign-in tab after 1 second
+        setTimeout(() => {
+          setActiveTab('signin');
+        }, 1500);
       }
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -121,7 +127,7 @@ const Auth = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Tabs defaultValue="signin" className="w-full">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="signin">Sign In</TabsTrigger>
                 <TabsTrigger value="signup">Sign Up</TabsTrigger>
@@ -244,13 +250,8 @@ const Auth = () => {
               </TabsContent>
             </Tabs>
 
-            <div className="mt-6 text-center text-sm text-muted-foreground space-y-2">
+            <div className="mt-6 text-center text-sm text-muted-foreground">
               <p>Admin test account: admin@sportsbuddy.com</p>
-              <p className="text-xs">
-                Not receiving emails? Check your spam folder or contact support.
-                <br />
-                If you already have an account, please sign in instead.
-              </p>
             </div>
           </CardContent>
         </Card>

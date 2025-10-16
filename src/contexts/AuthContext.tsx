@@ -102,15 +102,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   const signUp = async (email: string, password: string, fullName: string) => {
-    const redirectUrl = `${window.location.origin}/auth/callback`;
-
-    console.log('Signup attempt with redirect URL:', redirectUrl);
-    
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: redirectUrl,
         data: {
           full_name: fullName
         }
@@ -126,22 +121,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         variant: "destructive"
       });
     } else {
-      // Check if user already exists but isn't confirmed
-      if (data?.user && !data.user.email_confirmed_at) {
+      if (data?.user) {
         toast({
-          title: "Check your email",
-          description: "We've sent you a confirmation link. If you don't see it, check your spam folder or try again.",
-        });
-      } else if (data?.user && data.user.email_confirmed_at) {
-        toast({
-          title: "Account already exists",
-          description: "This email is already registered. Please sign in instead.",
-          variant: "destructive"
-        });
-      } else {
-        toast({
-          title: "Check your email",
-          description: "We've sent you a confirmation link. If you don't see it, check your spam folder.",
+          title: "Account created successfully!",
+          description: "You can now sign in with your credentials.",
         });
       }
     }
